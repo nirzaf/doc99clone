@@ -11,3 +11,6 @@ class Users(models.Model):
     Mobile_No = models.CharField(max_length=20)
     Auth_Token = models.CharField(max_length=200)
     Is_Deleted = models.BooleanField(initial=True)
+
+    def __str__(self):
+        return self.Id
