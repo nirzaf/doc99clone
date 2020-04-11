@@ -14,7 +14,7 @@ class Users(models.Model):
     Is_Deleted = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.Id
+        return "User with Id Number : " + str(self.Id) + " is added!"
 
 
 class Doctors(models.Model):
