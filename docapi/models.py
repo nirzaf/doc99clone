@@ -81,10 +81,3 @@ class Booking(models.Model):
     def __str__(self):
         return self.Booking_Id
 
-
-class Test(models.Model):
-    Test_Id: str = models.CharField(max_length=25)
-    Name = models.CharField(max_length=25)
-
-    def __str__(self):
-        return self.Test_Id
