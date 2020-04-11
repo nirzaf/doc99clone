@@ -26,7 +26,7 @@ class Doctors(models.Model):
     Is_Deleted = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.Id
+        return str("Dr." + self.First_Name + " " + self.Last_Name + " is added successfully!")
 
 
 class Hospitals(models.Model):
@@ -38,7 +38,7 @@ class Hospitals(models.Model):
     Is_Deleted = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.Id
+        return self.Name + " is added successfully!"
 
 
 class HospitalStaff(models.Model):
@@ -54,7 +54,7 @@ class HospitalStaff(models.Model):
     Is_Deleted = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.Id
+        return self.First_Name + " " + self.Last_Name + " is added successfully!"
 
 
 class Session(models.Model):
@@ -66,7 +66,7 @@ class Session(models.Model):
     Is_Deleted = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.Session_Id
+        return "Session created successfully with Session Id " + self.Session_Id
 
 
 class Booking(models.Model):
@@ -79,5 +79,5 @@ class Booking(models.Model):
     Is_Deleted = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.Booking_Id
+        return str(self.Booking_Id)
 
