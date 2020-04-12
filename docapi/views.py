@@ -1,6 +1,9 @@
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
 from .models import Users
 from .models import Doctors
 from .models import Hospitals
@@ -17,41 +20,80 @@ from .serializers import SessionSerializers
 
 
 # Create your views here.
-@csrf_exempt
+@api_view(['GET', 'POST'])
 def users_list(request):
     if request.method == 'GET':
         users = Users.objects.all()
         serializer = UsersSerializers(users, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UsersSerializers(data=data)
+        serializer = UsersSerializers(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
-        return JsonResponse(serializer.data, status=201)
-    return JsonResponse(serializer.errors, status=404)
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
+@api_view(['GET', 'PUT'])
+def users_detail(request, pk):
+    try:
+        user = Users.objects.get(pk=pk)
+    except Exception:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = UsersSerializers(user)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = UsersSerializers(user, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
 def doctors_list(request):
     if request.method == 'GET':
         doctors = Doctors.objects.all()
         doctorsSerializer = DoctorsSerializers(doctors, many=True)
-        return JsonResponse(doctorsSerializer.data, safe=False)
+        return Response(doctorsSerializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UsersSerializers(data=data)
+        serializer = DoctorsSerializers(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
-        return JsonResponse(serializer.data, status=201)
-    return JsonResponse(serializer.errors, status=404)
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
+@api_view(['GET', 'PUT'])
+def doctor_details(request, pk):
+    try:
+        doctor = Doctors.objects.get(pk=pk)
+    except Exception:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        doctors = Doctors.objects.all()
+        doctorsSerializer = DoctorsSerializers(doctors, many=True)
+        return Response(doctorsSerializer.data)
+
+    elif request.method == 'PUT':
+        serializer = DoctorsSerializers(doctor, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
 def hospital_list(request):
     if request.method == 'GET':
         hospital = Hospitals.objects.all()
@@ -59,61 +101,141 @@ def hospital_list(request):
         return JsonResponse(hospitalSerializer.data, safe=False)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UsersSerializers(data=data)
+        serializer = HospitalSerializers(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
-        return JsonResponse(serializer.data, status=201)
-    return JsonResponse(serializer.errors, status=404)
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
+@api_view(['GET', 'PUT'])
+def hospital_details(request, pk):
+    try:
+        hospital = Hospitals.objects.get(pk=pk)
+    except Exception:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        hospitals = Hospitals.objects.all()
+        hospitalSerializer = HospitalSerializers(hospitals, many=True)
+        return Response(hospitalSerializer.data)
+
+    elif request.method == 'PUT':
+        serializer = HospitalSerializers(hospital, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
 def hospital_staff_list(request):
     if request.method == 'GET':
         staff = HospitalStaff.objects.all()
         staffSerializers = HospitalStaffSerializers(staff, many=True)
-        return JsonResponse(staffSerializers.data, safe=False)
+        return Response(staffSerializers.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UsersSerializers(data=data)
+        serializer = HospitalStaffSerializers(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
-        return JsonResponse(serializer.data, status=201)
-    return JsonResponse(serializer.errors, status=404)
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
+@api_view(['GET', 'PUT'])
+def hospital_staff_details(request, pk):
+    try:
+        staff = HospitalStaff.objects.get(pk=pk)
+    except Exception:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        staff = HospitalStaff.objects.all()
+        staffSerializers = HospitalStaffSerializers(staff, many=True)
+        return Response(staffSerializers.data)
+
+    elif request.method == 'PUT':
+        serializer = HospitalStaffSerializers(staff, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
 def booking_list(request):
     if request.method == 'GET':
         book = Booking.objects.all()
         bookingSerializer = BookingSerializers(book, many=True)
-        return JsonResponse(bookingSerializer.data, safe=False)
+        return Response(bookingSerializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UsersSerializers(data=data)
+        serializer = BookingSerializers(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
-        return JsonResponse(serializer.data, status=201)
-    return JsonResponse(serializer.errors, status=404)
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 
-@csrf_exempt
+@api_view(['GET', 'PUT'])
+def booking_details(request, pk):
+    try:
+        booking = Booking.objects.get(pk=pk)
+    except Exception:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        book = Booking.objects.all()
+        bookingSerializer = BookingSerializers(book, many=True)
+        return Response(bookingSerializer.data)
+
+    elif request.method == 'PUT':
+        serializer = BookingSerializers(booking, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
 def session_list(request):
     if request.method == 'GET':
         session = Session.objects.all()
         sessionSerializer = SessionSerializers(session, many=True)
-        return JsonResponse(sessionSerializer.data, safe=False)
+        return Response(sessionSerializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UsersSerializers(data=data)
+        serializer = SessionSerializers(data=request.data)
 
     if serializer.is_valid():
         serializer.save()
-        return JsonResponse(serializer.data, status=201)
-    return JsonResponse(serializer.errors, status=404)
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT'])
+def session_details(request, pk):
+    try:
+        session = Session.objects.get(pk=pk)
+    except Exception:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        session = Session.objects.all()
+        sessionSerializer = SessionSerializers(session, many=True)
+        return Response(sessionSerializer.data)
+
+    elif request.method == 'PUT':
+        serializer = SessionSerializers(session, data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status.HTTP_201_CREATED)
+    return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
