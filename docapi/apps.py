@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class DocapiConfig(AppConfig):
+class DocApiConfig(AppConfig):
     name = 'docapi'

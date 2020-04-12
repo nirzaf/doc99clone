@@ -13,4 +13,5 @@ urlpatterns = [
     path('staffs/', hospital_staff_list),
     path('bookings/', booking_list),
     path('sessions/', session_list),
+    path('/', users_list)
 ]
