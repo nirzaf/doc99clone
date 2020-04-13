@@ -1,6 +1,8 @@
 from django.http import JsonResponse
 from rest_framework import generics
 from rest_framework import mixins
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -26,6 +28,8 @@ class GenericUsersAPI(generics.GenericAPIView, mixins.CreateModelMixin, mixins.U
     queryset = Users.objects.all()
 
     lookup_field = 'pk'
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk=None):
         return self.retrieve(request, pk=pk)
