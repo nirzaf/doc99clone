@@ -9,5 +9,11 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\Laptop 2\PycharmProjects\Doc99Clone\db.sqlite3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="MariaDB - django@localhost" uuid="fb27a5c4-bf31-4be3-a111-6e93fd3e472e">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://localhost:3306/django</jdbc-url>
+    </data-source>
   </component>
 </project>

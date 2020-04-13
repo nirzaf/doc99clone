@@ -1,25 +1,50 @@
 from django.http import JsonResponse
-from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework import mixins
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
-from .models import Users
-from .models import Doctors
-from .models import Hospitals
-from .models import HospitalStaff
-from .models import Session
 from .models import Booking
-
-from .serializers import UsersSerializers
+from .models import Doctors
+from .models import HospitalStaff
+from .models import Hospitals
+from .models import Session
+from .models import Users
+from .serializers import BookingSerializers
 from .serializers import DoctorsSerializers
 from .serializers import HospitalSerializers
 from .serializers import HospitalStaffSerializers
-from .serializers import BookingSerializers
 from .serializers import SessionSerializers
+from .serializers import UsersSerializers
 
 
 # Create your views here.
+class GenericUsersAPI(generics.GenericAPIView, mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                      mixins.RetrieveModelMixin):
+    serializer_class = UsersSerializers
+    queryset = Users.objects.all()
+
+    lookup_field = 'pk'
+
+    def get(self, request, pk=None):
+        return self.retrieve(request, pk=pk)
+
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, pk=None):
+        return self.update(request, pk)
+
+
+class GenericGetUsersAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = UsersSerializers
+    queryset = Users.objects.all()
+
+    def get(self, request):
+        return self.list(request)
+
+
 @api_view(['GET', 'POST'])
 def users_list(request):
     if request.method == 'GET':
