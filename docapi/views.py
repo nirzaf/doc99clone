@@ -37,7 +37,7 @@ class GenericUsersAPI(generics.GenericAPIView, mixins.CreateModelMixin, mixins.U
         return self.update(request, pk)
 
 
-class GenericGetUsersAPI(generics.GenericAPIView, mixins.ListModelMixin):
+class GenericUsersGetAPI(generics.GenericAPIView, mixins.ListModelMixin):
     serializer_class = UsersSerializers
     queryset = Users.objects.all()
 
@@ -45,6 +45,132 @@ class GenericGetUsersAPI(generics.GenericAPIView, mixins.ListModelMixin):
         return self.list(request)
 
 
+class GenericDoctorsAPI(generics.GenericAPIView, mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                        mixins.RetrieveModelMixin):
+    serializer_class = DoctorsSerializers
+    queryset = Doctors.objects.all()
+
+    lookup_field = 'pk'
+
+    def get(self, request, pk=None):
+        return self.retrieve(request, pk=pk)
+
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, pk=None):
+        return self.update(request, pk)
+
+
+class GenericDoctorsGetAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = DoctorsSerializers
+    queryset = Doctors.objects.all()
+
+    def get(self, request):
+        return self.list(request)
+
+
+class GenericHospitalAPI(generics.GenericAPIView, mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                         mixins.RetrieveModelMixin):
+    serializer_class = HospitalSerializers
+    queryset = Hospitals.objects.all()
+
+    lookup_field = 'pk'
+
+    def get(self, request, pk=None):
+        return self.retrieve(request, pk=pk)
+
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, pk=None):
+        return self.update(request, pk)
+
+
+class GenericHospitalGetAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = HospitalSerializers
+    queryset = Hospitals.objects.all()
+
+    def get(self, request):
+        return self.list(request)
+
+
+class GenericHospitalStaffAPI(generics.GenericAPIView, mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                              mixins.RetrieveModelMixin):
+    serializer_class = HospitalStaffSerializers
+    queryset = HospitalStaff.objects.all()
+
+    lookup_field = 'pk'
+
+    def get(self, request, pk=None):
+        return self.retrieve(request, pk=pk)
+
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, pk=None):
+        return self.update(request, pk)
+
+
+class GenericHospitalStaffGetAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = HospitalStaffSerializers
+    queryset = HospitalStaff.objects.all()
+
+    def get(self, request):
+        return self.list(request)
+
+
+class GenericBookingAPI(generics.GenericAPIView, mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                        mixins.RetrieveModelMixin):
+    serializer_class = BookingSerializers
+    queryset = Booking.objects.all()
+
+    lookup_field = 'pk'
+
+    def get(self, request, pk=None):
+        return self.retrieve(request, pk=pk)
+
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, pk=None):
+        return self.update(request, pk)
+
+
+class GenericBookingGetAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = BookingSerializers
+    queryset = Booking.objects.all()
+
+    def get(self, request):
+        return self.list(request)
+
+
+class GenericSessionAPI(generics.GenericAPIView, mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                        mixins.RetrieveModelMixin):
+    serializer_class = SessionSerializers
+    queryset = Session.objects.all()
+
+    lookup_field = 'pk'
+
+    def get(self, request, pk=None):
+        return self.retrieve(request, pk=pk)
+
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, pk=None):
+        return self.update(request, pk)
+
+
+class GenericSessionGetAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = HospitalStaffSerializers
+    queryset = HospitalStaff.objects.all()
+
+    def get(self, request):
+        return self.list(request)
+
+
+"""
 @api_view(['GET', 'POST'])
 def users_list(request):
     if request.method == 'GET':
@@ -264,3 +390,4 @@ def session_details(request, pk):
         serializer.save()
         return Response(serializer.data, status.HTTP_201_CREATED)
     return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+    """

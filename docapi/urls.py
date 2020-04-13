@@ -1,25 +1,22 @@
 from django.urls import path
-from .views import users_list, users_detail, GenericUsersAPI, GenericGetUsersAPI
-from .views import doctors_list, doctor_details
-from .views import hospital_list, hospital_details
-from .views import hospital_staff_list, hospital_staff_details
-from .views import booking_list, booking_details
-from .views import session_list, session_details
+from .views import GenericUsersAPI, GenericUsersGetAPI
+from .views import GenericDoctorsAPI, GenericDoctorsGetAPI
+from .views import GenericHospitalAPI, GenericHospitalGetAPI
+from .views import GenericHospitalStaffAPI, GenericHospitalStaffGetAPI
+from .views import GenericBookingAPI, GenericBookingGetAPI
+from .views import GenericSessionAPI, GenericSessionGetAPI
 
 urlpatterns = [
-    path('users/', users_list),
-    path('user_details/<int:pk>/', users_detail),
-    path('api/users/', GenericGetUsersAPI.as_view()),
+    path('api/users/', GenericUsersGetAPI.as_view()),
     path('api/users/<int:pk>/', GenericUsersAPI.as_view()),
-    path('doctors/', doctors_list),
-    path('doctor_details/<int:pk>/', doctor_details),
-    path('hospitals/', hospital_list),
-    path('hospital_details/<int:pk>/', hospital_details),
-    path('staffs/', hospital_staff_list),
-    path('staffs_details/<int:pk>/', hospital_staff_details),
-    path('bookings/', booking_list),
-    path('bookings/<int:pk>/', booking_details),
-    path('sessions/', session_list),
-    path('sessions/<int:pk>/', session_details),
-    path('/', users_list)
+    path('api/doctors/', GenericDoctorsGetAPI.as_view()),
+    path('api/doctors/<int:pk>/', GenericDoctorsAPI.as_view()),
+    path('api/hospitals/', GenericHospitalGetAPI.as_view()),
+    path('api/hospitals/<int:pk>/', GenericHospitalAPI.as_view()),
+    path('api/staffs/', GenericHospitalStaffGetAPI.as_view()),
+    path('api/staffs/<int:pk>/', GenericHospitalStaffAPI.as_view()),
+    path('api/bookings/', GenericBookingGetAPI.as_view()),
+    path('api/bookings/<int:pk>/', GenericBookingAPI.as_view()),
+    path('api/sessions/', GenericSessionGetAPI.as_view()),
+    path('api/sessions/<int:pk>/', GenericSessionAPI.as_view()),
 ]
