@@ -15,5 +15,13 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://localhost:3306/django</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="mysql" uuid="1c8d683d-5b5f-4775-bd14-db1dd6a1dbb3">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/Doc99Clone/settings.py</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/django</jdbc-url>
+    </data-source>
   </component>
 </project>
