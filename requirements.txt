@@ -3,7 +3,6 @@ astroid==2.3.3
 colorama==0.4.3
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==3.0.5
 djangorestframework==3.11.0
 isort==4.3.21
 lazy-object-proxy==1.4.3
