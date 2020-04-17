@@ -1,0 +1,8 @@
+..\__pycache__\dj_static.cpython-37.pyc
+..\dj_static.py
+PKG-INFO
+SOURCES.txt
+dependency_links.txt
+not-zip-safe
+requires.txt
+top_level.txt

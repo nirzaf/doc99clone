@@ -1,0 +1,11 @@
+..\..\..\Scripts\static-script.py
+..\..\..\Scripts\static.exe
+..\__pycache__\static.cpython-37.pyc
+..\static.py
+PKG-INFO
+SOURCES.txt
+dependency_links.txt
+entry_points.txt
+pbr.json
+requires.txt
+top_level.txt
