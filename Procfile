@@ -1,1 +1,1 @@
-worker: gunicorn Doc99Clone.wsgi --log-file -
+web: gunicorn Doc99Clone.wsgi --log-file -
